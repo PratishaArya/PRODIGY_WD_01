@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Delicious Eats Restaurant</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Welcome to Delicious Eats</h2>
+                <p>Experience the taste of perfection.</p>
+                <a href="#menu" class="btn">View Menu</a>
+            </div>
+        </section>
+
+        <section id="menu">
+            <div class="container">
+                <h2>Our Menu</h2>
+                <div class="gallery">
+                    <div class="menu-item" id="menu-item-1">
+                        <h3>Appetizers</h3>
+                        <p>Delicious starters to kick off your meal.</p>
+                        <img src="app1.jpg" alt="Appetizer 1" class="menu-img" onclick="openGallery('app1.jpg')">
+                    </div>
+                    <div class="menu-item" id="menu-item-2">
+                        <h3>Main Courses</h3>
+                        <p>Satisfy your hunger with our hearty main dishes.</p>
+                        <img src="indm2.jpg" alt="Main Course 1" class="menu-img" onclick="openGallery('indm2.jpg')">
+                    </div>
+                    <div class="menu-item" id="menu-item-3">
+                        <h3>Desserts</h3>
+                        <p>Indulge in our sweet treats to complete your dining experience.</p>
+                        <img src="des1.jpg" alt="Dessert 1" class="menu-img" onclick="openGallery('des1.jpg')">
+                    </div>
+                    <!-- Additional menu items can be added similarly -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>Welcome to Delicious Eats, where taste meets excellence. Our mission is to provide our customers with a culinary experience that tantalizes the taste buds and leaves a lasting impression. From our carefully curated menu to our cozy ambiance, we strive to create a memorable dining experience for every guest.</p>
+                <p>At Delicious Eats, we are passionate about food and dedicated to using only the freshest ingredients in our dishes. Whether you're joining us for a quick bite or a special occasion, we guarantee a delightful journey through flavors that celebrate the art of cooking.</p>
+                <p>Join us and indulge in the flavors that define us. Experience the essence of fine dining at Delicious Eats.</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>Have a question or want to make a reservation? Reach out to us!</p>
+                <div class="contact-info">
+                    <p><strong>Address:</strong> 123 Delicious Street, City, Country</p>
+                    <p><strong>Phone:</strong> +1 234 567 890</p>
+                    <p><strong>Email:</strong> info@deliciouseats.com</p>
+                </div>
+                <form action="#" method="post" class="contact-form">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Delicious Eats. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="gallery-modal" class="modal">
+        <span class="close" onclick="closeGallery()">&times;</span>
+        <div class="modal-content">
+            <img src="" alt="Gallery Image" id="gallery-img">
+            <div class="gallery-navigation">
+                <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+                <span class="next" onclick="changeImage(1)">&#10095;</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let galleryImages = [];
+        let currentImageIndex = 0;
+
+        function openGallery(imageSrc) {
+            galleryImages = document.querySelectorAll('.menu-img');
+            galleryImages = Array.from(galleryImages).map(img => img.src);
+            currentImageIndex = galleryImages.indexOf(imageSrc);
+            showGalleryImage(currentImageIndex);
+            document.getElementById('gallery-modal').style.display = 'block';
+        }
+
+        function closeGallery() {
+            document.getElementById('gallery-modal').style.display = 'none';
+        }
+
+        function showGalleryImage(index) {
+            currentImageIndex = index;
+            document.getElementById('gallery-img').src = galleryImages[index];
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex >= galleryImages.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = galleryImages.length - 1;
+            }
+            showGalleryImage(currentImageIndex);
+        }
+
+        // Close the modal if user clicks outside of the image
+        window.onclick = function(event) {
+            let modal = document.getElementById('gallery-modal');
+            if (event.target == modal) {
+                closeGallery();
+            }
+        };
+    </script>
+</body>
+</html>
